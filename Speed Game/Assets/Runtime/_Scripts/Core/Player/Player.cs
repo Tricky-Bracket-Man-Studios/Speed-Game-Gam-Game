@@ -9,7 +9,7 @@ namespace SpeedGame.Core.Player
         // Definition:
         // This class will handle the code for the player:
 
-        #region Variables:
+        #region Variables: 
 
         #endregion
 
