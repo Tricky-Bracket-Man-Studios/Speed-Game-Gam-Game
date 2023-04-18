@@ -11,8 +11,6 @@ namespace SpeedGame.Core.Player
 
         #region Variables:
 
-        public Transform hitBoxTransform;
-
         #endregion
 
         #region Methods:
