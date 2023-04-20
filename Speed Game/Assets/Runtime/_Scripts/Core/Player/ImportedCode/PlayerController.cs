@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -21,6 +22,7 @@ public PlayerControls playerControls;
 
 private InputAction _movement;
 private InputAction _jump;
+private InputAction _click;
 private bool _jumpUp;
 private bool _jumpDown;
 public static PlayerController Instance;
@@ -37,11 +39,14 @@ void OnEnable() {
     _movement.Enable();
     _jump = playerControls.ActionMapPlayer.Jump;
     _jump.Enable();
+    _click = playerControls.ActionMapPlayer.Click;
+    _click.Enable();
 
 }
 public void OnDisable() {
     _movement.Disable();
     _jump.Disable();
+    _click.Disable();
 
 }
 
@@ -81,16 +86,20 @@ private bool _active;
 void Activate() => _active = true;
 private void Update() {
 if(!_active) return;
+if(isDashing) return;
 // Calculate velocity
 Velocity = (transform.position - _lastPosition) / Time.deltaTime;
 _lastPosition = transform.position;
+
 GatherInput();
 RunCollisionChecks();
+DashCharacter(); // Dash Movement
 CalculateWalk(); // Horizontal movement
 CalculateJumpApex(); // Affects fall speed, so calculate before gravity
 CalculateGravity(); // Vertical movement
 CalculateJump(); // Possibly overrides vertical
 MoveCharacter(); // Actually perform the axis movement
+
 }
 #region Gather Input
 private void GatherInput() {
@@ -268,6 +277,16 @@ private int _freeColliderIterations = 10;
 private void MoveCharacter() {
 var pos = transform.position + _characterBounds.center;
 RawMovement = new Vector3(_currentHorizontalSpeed, _currentVerticalSpeed); // Used externally
+
+if(RawMovement.x >= Vector2.zero.x)
+{
+    transform.localScale = new Vector3(1, 1, 1);
+}
+else if (RawMovement.x <= Vector2.zero.x)
+{
+    transform.localScale = new Vector3(-1, 1, 1);
+}
+
 var move = RawMovement * Time.deltaTime;
 var furthestPoint = pos + move;
 // check furthest movement. If nothing hit, move and don't do extra checks
@@ -296,5 +315,57 @@ positionToMoveTo = posToTry;
 }
 }
 #endregion
+#region Dash
+[Header("DASH")] [SerializeField, Tooltip("This controls the dash physics")]
+// Variables
+private bool canDash = true;
+private bool isDashing = false;
+[SerializeField] private float dashingPower = 24f;
+[SerializeField] private float dashingTime = 0.2f;
+[SerializeField] private float dashingCooldown = 1f;
+
+[SerializeField] private Rigidbody2D _rigidbody;
+[SerializeField] private TrailRenderer _trailRenderer;
+private void DashCharacter()
+{
+    playerControls.ActionMapPlayer.Click.started += context => 
+    {
+        if(canDash)
+        {
+            StartCoroutine(Dash());
+        }
+    };
+    IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = _rigidbody.gravityScale;
+        Vector2 originalVelocity = _rigidbody.velocity;
+        _rigidbody.gravityScale = 0f;
+
+        if(RawMovement.x >= Vector2.zero.x)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (RawMovement.x <= Vector2.zero.x)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+
+        _rigidbody.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        
+        _trailRenderer.emitting = true;
+        yield return new WaitForSeconds(dashingTime);
+        _trailRenderer.emitting = false;
+        _rigidbody.gravityScale = originalGravity;
+        _rigidbody.velocity = originalVelocity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+    }
+
+}
+#endregion
+
 }
 }
