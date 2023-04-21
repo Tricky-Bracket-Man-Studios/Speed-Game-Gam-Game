@@ -53,6 +53,11 @@
         "Temp/":true
     },
     "cSpell.words": [
-        "Behaviour"
+        "Behaviour",
+        "Cooldown",
+        "Lerp",
+        "Powerups",
+        "raycast",
+        "Rigidbody"
     ]
 }

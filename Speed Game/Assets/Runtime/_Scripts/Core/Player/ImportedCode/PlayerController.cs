@@ -51,7 +51,7 @@ public void OnDisable() {
 }
 
 private void Start() {
-    // JumpBools to replace GetButtonDown
+    // Jump Bool's to replace GetButtonDown
     playerControls.ActionMapPlayer.Jump.started += context => {
         //Debug.Log("Started");
         _jumpUp = false;
@@ -273,52 +273,64 @@ if (_currentVerticalSpeed > 0) _currentVerticalSpeed = 0;
 #region Move
 [Header("MOVE")] [SerializeField, Tooltip("Raising this value increases collision accuracy at the cost of performance.")]
 private int _freeColliderIterations = 10;
+private bool isFacingRight = true;
 // We cast our bounds before moving to avoid future collisions
-private void MoveCharacter() {
-var pos = transform.position + _characterBounds.center;
-RawMovement = new Vector3(_currentHorizontalSpeed, _currentVerticalSpeed); // Used externally
-
-if(RawMovement.x >= Vector2.zero.x)
+private void MoveCharacter() 
 {
-    transform.localScale = new Vector3(1, 1, 1);
-}
-else if (RawMovement.x <= Vector2.zero.x)
-{
-    transform.localScale = new Vector3(-1, 1, 1);
-}
+    var pos = transform.position + _characterBounds.center;
+    RawMovement = new Vector3(_currentHorizontalSpeed, _currentVerticalSpeed); // Used externally
+    var move = RawMovement * Time.deltaTime;
+    var furthestPoint = pos + move;
+    // flipping the characters sprite to match the direction its moving in
+    if(RawMovement.x > Vector2.zero.x && !isFacingRight)
+    {
+        Flip();
+    }
+    else if (RawMovement.x < Vector2.zero.x && isFacingRight)
+    {
+        Flip();
+    }
+    // check furthest movement. If nothing hit, move and don't do extra checks
+    var hit = Physics2D.OverlapBox(furthestPoint, _characterBounds.size, 0, _groundLayer);
+    if (!hit) 
+    {
+        transform.position += move;
+        return;
+    }
+    // otherwise increment away from current pos; see what closest position we can move to
+    var positionToMoveTo = transform.position;
+    for (int i = 1; i < _freeColliderIterations; i++) 
+    {
+        // increment to check all but furthestPoint - we did that already
+        var t = (float)i / _freeColliderIterations;
+        var posToTry = Vector2.Lerp(pos, furthestPoint, t);
+        if (Physics2D.OverlapBox(posToTry, _characterBounds.size, 0, _groundLayer)) {
+        transform.position = positionToMoveTo;
+        // We've landed on a corner or hit our head on a ledge. Nudge the player gently
+        if (i == 1) {
+        if (_currentVerticalSpeed < 0) _currentVerticalSpeed = 0;
+        var dir = transform.position - hit.transform.position;
+        transform.position += dir.normalized * move.magnitude;
+        }
+        return;
+        }
+        positionToMoveTo = posToTry;
+    }
+    // optimizing out flip-age
+    void Flip()
+    {
+        Vector3 currentScale = transform.localScale;
+        currentScale.x *= -1;
+        transform.localScale = currentScale;
 
-var move = RawMovement * Time.deltaTime;
-var furthestPoint = pos + move;
-// check furthest movement. If nothing hit, move and don't do extra checks
-var hit = Physics2D.OverlapBox(furthestPoint, _characterBounds.size, 0, _groundLayer);
-if (!hit) {
-transform.position += move;
-return;
-}
-// otherwise increment away from current pos; see what closest position we can move to
-var positionToMoveTo = transform.position;
-for (int i = 1; i < _freeColliderIterations; i++) {
-// increment to check all but furthestPoint - we did that already
-var t = (float)i / _freeColliderIterations;
-var posToTry = Vector2.Lerp(pos, furthestPoint, t);
-if (Physics2D.OverlapBox(posToTry, _characterBounds.size, 0, _groundLayer)) {
-transform.position = positionToMoveTo;
-// We've landed on a corner or hit our head on a ledge. Nudge the player gently
-if (i == 1) {
-if (_currentVerticalSpeed < 0) _currentVerticalSpeed = 0;
-var dir = transform.position - hit.transform.position;
-transform.position += dir.normalized * move.magnitude;
-}
-return;
-}
-positionToMoveTo = posToTry;
-}
+        isFacingRight = !isFacingRight;
+    }
 }
 #endregion
 #region Dash
 [Header("DASH")] [SerializeField, Tooltip("This controls the dash physics")]
 // Variables
-private bool canDash = true;
+private bool canDash = false;
 private bool isDashing = false;
 [SerializeField] private float dashingPower = 24f;
 [SerializeField] private float dashingTime = 0.2f;
@@ -337,25 +349,18 @@ private void DashCharacter()
     };
     IEnumerator Dash()
     {
+        // Updating player dash bool's
         canDash = false;
         isDashing = true;
+        // Saving the players original states
         float originalGravity = _rigidbody.gravityScale;
         Vector2 originalVelocity = _rigidbody.velocity;
+        // preforming the dash
         _rigidbody.gravityScale = 0f;
-
-        if(RawMovement.x >= Vector2.zero.x)
-        {
-            transform.localScale = new Vector3(1, 1, 1);
-        }
-        else if (RawMovement.x <= Vector2.zero.x)
-        {
-            transform.localScale = new Vector3(-1, 1, 1);
-        }
-
         _rigidbody.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-        
         _trailRenderer.emitting = true;
         yield return new WaitForSeconds(dashingTime);
+        // reverting the dash effects
         _trailRenderer.emitting = false;
         _rigidbody.gravityScale = originalGravity;
         _rigidbody.velocity = originalVelocity;
@@ -364,6 +369,15 @@ private void DashCharacter()
         canDash = true;
     }
 
+}
+
+public void EnableDash()
+{
+    canDash = true;
+}
+public void DisableDash()
+{
+    canDash = false;
 }
 #endregion
 
