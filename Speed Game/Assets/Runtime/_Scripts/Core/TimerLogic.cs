@@ -22,8 +22,8 @@ namespace SpeedGame.Core
 
         [Header("Timer Stats:")] 
         [SerializeField] private Types _currentType = Types.None;
-        [SerializeField] private float _currentTime = 120f;
-        [SerializeField] private float _startingTime = 120f;
+        [SerializeField] private float _currentTime = 0f;
+        [SerializeField] private float _startingTime = 0f;
 
         [SerializeField] private int _currentSec;
         [SerializeField] private int _currentMin;
@@ -74,7 +74,7 @@ namespace SpeedGame.Core
         {
             return _currentType;
         }
-        public int GetcurrentTime()
+        public int GetCurrentTime()
         {
             return (int)_currentTime;
         }

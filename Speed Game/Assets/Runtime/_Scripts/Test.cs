@@ -13,6 +13,7 @@ namespace SpeedGame
 
         public TimerLogic timer;
         public bool startTimer = true;
+        public DoorLogic door;
 
         private void Start()
         {
@@ -21,20 +22,25 @@ namespace SpeedGame
 
         private void Update() 
         {
-            if(testPlate.GetPlateState())
+
+            if(testPlate.GetPlateState() == true)
             {
                 meshRenderer.enabled = true;
+                
                 if(startTimer)
                 {
-                    timer.StartWatch(TimerLogic.Types.Timer, 120f);
-                    timer.AddTimeInSecs(60f);
+                    timer.StartWatch(TimerLogic.Types.Timer, 10f);
                     startTimer = false;
+                }
+                if(timer.GetCurrentTime() > 0f)
+                {
+                    door.SetDoorState(true);
                 }
                 
             }
-            else
+            else if(testPlate.GetPlateState() == false)
             {
-                meshRenderer.enabled = false;
+                door.SetDoorState(false);
             }
         }
         

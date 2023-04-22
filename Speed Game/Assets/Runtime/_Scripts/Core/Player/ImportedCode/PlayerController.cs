@@ -23,6 +23,7 @@ public PlayerControls playerControls;
 private InputAction _movement;
 private InputAction _jump;
 private InputAction _click;
+private InputAction _interact;
 private bool _jumpUp;
 private bool _jumpDown;
 public static PlayerController Instance;
@@ -41,12 +42,15 @@ void OnEnable() {
     _jump.Enable();
     _click = playerControls.ActionMapPlayer.Click;
     _click.Enable();
+    _interact = playerControls.ActionMapPlayer.Interact;
+    _interact.Enable();
 
 }
 public void OnDisable() {
     _movement.Disable();
     _jump.Disable();
     _click.Disable();
+    _interact.Disable();
 
 }
 
@@ -93,6 +97,7 @@ _lastPosition = transform.position;
 
 GatherInput();
 RunCollisionChecks();
+RunInteractions(); // Player item interactions
 DashCharacter(); // Dash Movement
 CalculateWalk(); // Horizontal movement
 CalculateJumpApex(); // Affects fall speed, so calculate before gravity
@@ -378,6 +383,28 @@ public void EnableDash()
 public void DisableDash()
 {
     canDash = false;
+}
+#endregion
+
+#region Interact
+[Header("Interact")] 
+// Variables
+[SerializeField, Tooltip("This controls the powerup physics")]
+private bool PlayerIsInteracting;
+private void RunInteractions()
+{
+    playerControls.ActionMapPlayer.Interact.started += context => 
+    {
+        PlayerIsInteracting = true;
+    };
+    playerControls.ActionMapPlayer.Interact.canceled += context => 
+    {
+        PlayerIsInteracting = false;
+    };
+}
+public bool GetPlayerIsInteracting()
+{
+    return PlayerIsInteracting;
 }
 #endregion
 

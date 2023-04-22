@@ -10,13 +10,41 @@ namespace SpeedGame.Intractables.Items.Powerups
         // Definition: 
         // This class will handle all the logic for the punching glove.
 
+        // Variables:
+        private bool playerInRange = false;
+        [SerializeField] private PlayerController player;
+        [SerializeField] private PlayerInventory playerInventory;
+
         // if the player and only the player collides with the punching glove, enable their dash.
         private void OnTriggerEnter2D(Collider2D other) 
         {
             if(other.tag == "Player")
             {
-                other.gameObject.GetComponent<PlayerInventory>().AddToInventory(PlayerInventory.Items.Powerups_PunchingGlove);
-                Destroy(gameObject);
+                player = other.gameObject.GetComponent<PlayerController>() ;
+                playerInventory = other.gameObject.GetComponent<PlayerInventory>() ;
+
+                playerInRange = true;
+            }
+            
+        }
+        private void OnTriggerExit2D(Collider2D other) 
+        {
+            if(other.tag == "Player")
+            {
+                playerInRange = false;
+            }
+            
+        }
+
+        private void Update()
+        {
+            if(playerInRange)
+            {
+                if(player.GetPlayerIsInteracting())
+                {
+                    playerInventory.AddToInventory(PlayerInventory.Items.Powerups_PunchingGlove);
+                    Destroy(gameObject);
+                }
             }
             
         }
