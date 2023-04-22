@@ -14,7 +14,9 @@ namespace SpeedGame.Intractables.Items.Powerups
         private bool playerInRange = false;
         [SerializeField] private PlayerController player;
         [SerializeField] private PlayerInventory playerInventory;
-
+        [SerializeField] private Transform _parentTransform;
+        
+        // Private functions:
         // if the player and only the player collides with the punching glove, enable their dash.
         private void OnTriggerEnter2D(Collider2D other) 
         {
@@ -43,7 +45,8 @@ namespace SpeedGame.Intractables.Items.Powerups
                 if(player.GetPlayerIsInteracting())
                 {
                     playerInventory.AddToInventory(PlayerInventory.Items.Powerups_PunchingGlove);
-                    Destroy(gameObject);
+                    playerInventory.AddStoredPowerup(gameObject);
+                    gameObject.SetActive(false);
                 }
             }
             

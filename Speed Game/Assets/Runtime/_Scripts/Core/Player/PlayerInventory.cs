@@ -18,6 +18,7 @@ namespace SpeedGame.Core.Player
             Powerups_PunchingGlove,
         }
         [SerializeField] private Items[] _inventory;
+        private GameObject _storedPowerup;
         private Items _currentItem;
         private PlayerController _controller;
 
@@ -44,6 +45,7 @@ namespace SpeedGame.Core.Player
             {
                 case(Items.Powerups_PunchingGlove):
                     _controller.DisableDash();
+                    DropPowerup();
                     //TODO Add Unit Manager so that it drops the item that got switched out in this location.
                     break;
             }
@@ -60,6 +62,17 @@ namespace SpeedGame.Core.Player
         public void AddToInventory(Items item)
         {
             _inventory[0] = item;
+        }
+        public void AddStoredPowerup(GameObject powerup)
+        {
+            _storedPowerup = powerup;
+        }
+        private void DropPowerup()
+        {
+            var newPowerup = Instantiate(_storedPowerup);
+            newPowerup.transform.position = transform.position;
+            newPowerup.SetActive(true);
+            Destroy(_storedPowerup);
         }
     }
 }
