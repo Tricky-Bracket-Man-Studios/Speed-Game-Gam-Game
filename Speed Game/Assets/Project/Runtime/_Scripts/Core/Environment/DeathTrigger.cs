@@ -16,7 +16,7 @@ namespace SpeedGame.Core.Environment
             if(other.CompareTag("Player"))
             {
                 Debug.Log("Respawned");
-                other.gameObject.transform.position = Vector2.zero;
+                other.gameObject.transform.position = new Vector2(-35f, 1);
             }
             
         }

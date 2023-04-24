@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 222e7c7c7c7ee604c99608b4a76889eb
+guid: 6277580beeac172468aa66f114c4e95e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -109,7 +109,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67291a8c1f64ae64382a98a20da40d6c
-      internalID: 213659152
+      spriteID: 7a1e94efb6c988349a11567f97373522
+      internalID: 709791324
       vertices: []
       indices: 
       edges: []
@@ -130,7 +130,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8203063b1867874439851182a2210705
-      internalID: 1381956228
+      spriteID: b0b7e53e1566c414da0dc30954c66c60
+      internalID: -263138134
       vertices: []
       indices: 
       edges: []
@@ -151,6 +151,69 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11be20dee8b69c54182e89e9a69f656c
+      internalID: -1874880428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempleSet_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68c2e86503cd2594f9889beb593f97b3
+      internalID: 439022640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempleSet_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ed44b1d084bb244f87368f0021919aa
+      internalID: -797210224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempleSet_5
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 64
         width: 32
         height: 32
@@ -161,71 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c496833592c775f468ba29196dac808c
-      internalID: 1300424797
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TempleSet_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5008aa85e3444214c940b3fdb21ddcf3
-      internalID: 354623880
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TempleSet_4
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c379bfc56665f5b46ae2b9b92ab4ef82
-      internalID: 1709467734
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TempleSet_5
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0c821a53933bea34297973f11a929200
-      internalID: 1676378986
+      spriteID: bde081e1838fff743a71746cf5b6f874
+      internalID: 465402663
       vertices: []
       indices: 
       edges: []
@@ -234,6 +234,195 @@ TextureImporter:
       name: TempleSet_6
       rect:
         serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f086ff5770270ea48bbd5f73b7fc7081
+      internalID: 1186618919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempleSet_7
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cff068fff4b832b42bc4a52986b1a6fa
+      internalID: -1748523143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempleSet_8
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a748ebabf34bb0540b42296993a13bee
+      internalID: 2130800764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempleSet_9
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f770e56381959a47afdb461c35c7171
+      internalID: -1440545655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempleSet_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97243ab67ded99b4f98389a993865f90
+      internalID: -2038303000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempleSet_11
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3967efff37830ec4c90b7f3864203e74
+      internalID: -118150834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempleSet_12
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ca6331ff2583e54682764a0938e75b2
+      internalID: 263022889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempleSet_13
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48b364544b6d7944e836a686f3d68440
+      internalID: -1327545591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempleSet_14
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c28c6f9144f0b842a2f199efdbab2f3
+      internalID: 812625832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempleSet_15
+      rect:
+        serializedVersion: 2
         x: 0
         y: 0
         width: 32
@@ -245,14 +434,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a8a30ff17e1afb48971a7c45ded02e1
-      internalID: 1865323517
+      spriteID: d44b4165f8b7cf2428913b471816f083
+      internalID: 740662461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TempleSet_7
+      name: TempleSet_16
       rect:
         serializedVersion: 2
         x: 32
@@ -266,14 +455,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e330f725155750e4cb2a66e42bd31295
-      internalID: -1148401415
+      spriteID: 13c9410ffa3f11343b44ad41c3caacb8
+      internalID: 907646073
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TempleSet_8
+      name: TempleSet_17
       rect:
         serializedVersion: 2
         x: 64
@@ -287,8 +476,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1976a61c3a4beeb48809c8a79ec79d2a
-      internalID: 1876120575
+      spriteID: 853c6ed969c006a45a74b0dbe47fb98e
+      internalID: 512442329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempleSet_18
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6de49fabafdd5549bcbc1edd26180a5
+      internalID: -453822585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TempleSet_19
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17fbf0fbee47ef74f9cf4f1aa4d7e180
+      internalID: -943475518
       vertices: []
       indices: 
       edges: []
@@ -304,15 +535,26 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      TempleSet_0: 213659152
-      TempleSet_1: 1381956228
-      TempleSet_2: 1300424797
-      TempleSet_3: 354623880
-      TempleSet_4: 1709467734
-      TempleSet_5: 1676378986
-      TempleSet_6: 1865323517
-      TempleSet_7: -1148401415
-      TempleSet_8: 1876120575
+      TempleSet_0: 709791324
+      TempleSet_1: -263138134
+      TempleSet_10: -2038303000
+      TempleSet_11: -118150834
+      TempleSet_12: 263022889
+      TempleSet_13: -1327545591
+      TempleSet_14: 812625832
+      TempleSet_15: 740662461
+      TempleSet_16: 907646073
+      TempleSet_17: 512442329
+      TempleSet_18: -453822585
+      TempleSet_19: -943475518
+      TempleSet_2: -1874880428
+      TempleSet_3: 439022640
+      TempleSet_4: -797210224
+      TempleSet_5: 465402663
+      TempleSet_6: 1186618919
+      TempleSet_7: -1748523143
+      TempleSet_8: 2130800764
+      TempleSet_9: -1440545655
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

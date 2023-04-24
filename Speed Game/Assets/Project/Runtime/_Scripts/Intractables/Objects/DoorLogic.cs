@@ -20,7 +20,7 @@ namespace SpeedGame.Intractables.Objects
         private void Awake()
         {
             _doorClosedPos = transform.position;
-            _doorOpenPos = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
+            _doorOpenPos = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
         }
 
         private void Update()
@@ -52,14 +52,35 @@ namespace SpeedGame.Intractables.Objects
         }
 
         // Public functions
+        public void SetDoorOpenPos(float x, float y)
+        {
+            _doorOpenPos.x = x;
+            _doorOpenPos.y = y;
+        }
+        public void SetDoorClosePos(float x, float y)
+        {
+            _doorClosedPos.x = x;
+            _doorClosedPos.y = y;
+        }
         public void SetDoorState(bool state)
         {
             _isDoorOpen = state;
+        }
+
+        //Getters
+        public Vector3 GetDoorOpenPos()
+        {
+            return _doorOpenPos;
+        }
+        public Vector3 GetDoorClosePos()
+        {
+            return _doorClosedPos;
         }
         public bool GetDoorState()
         {
             return _isDoorOpen;
         }
+        
 
     }
 }

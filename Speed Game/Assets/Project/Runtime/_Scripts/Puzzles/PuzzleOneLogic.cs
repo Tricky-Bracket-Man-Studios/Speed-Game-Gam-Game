@@ -13,9 +13,16 @@ public class PuzzleOneLogic : MonoBehaviour
     [SerializeField] private DoorLogic door1;
     [SerializeField] private DoorLogic door2;
 
+    private void Start()
+    {
+        door1.SetDoorOpenPos(door1.GetDoorClosePos().x - 2f, door1.GetDoorClosePos().y);
+        
+    }
+
     private void Update()
     {
-        
+        door1.SetDoorState(pressurePlate1.GetPlateState());
+        door2.SetDoorState(pressurePlate2.GetPlateState());
     }
 
 }

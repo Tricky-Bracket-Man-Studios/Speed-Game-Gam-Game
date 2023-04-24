@@ -16,11 +16,16 @@ namespace SpeedGame.Core.Player
             Powerups_PunchingGlove,
             Powerups_LeadBoots,
             Powerups_JumpBoots,
+            Items_Gem,
         }
         [SerializeField] private Items[] _inventory;
         [SerializeField] private GameObject _storedPowerup;
         [SerializeField] private Items _currentItem;
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip _defaultClip;
+        [SerializeField] private AudioClip GemAudioClip;
         private PlayerController _controller;
+
 
         // Private functions:
         private void Start() 
@@ -47,6 +52,11 @@ namespace SpeedGame.Core.Player
                     _controller.DisableDash();
                     DropPowerup();
                     break;
+                case(Items.Items_Gem):
+                    _audioSource.clip = _defaultClip;
+                    _audioSource.Play(0);
+                    DropPowerup();
+                    break;
                 case(Items.Powerups_JumpBoots):
                     _controller.DisableBoostJump();
                     DropPowerup();
@@ -67,6 +77,10 @@ namespace SpeedGame.Core.Player
                     break;
                 case(Items.Powerups_LeadBoots):
                     _controller.EnableLeadJump();
+                    break;
+                case(Items.Items_Gem):
+                    _audioSource.clip = GemAudioClip;
+                    _audioSource.Play(0);
                     break;
             }
         }

@@ -33,6 +33,7 @@ void Awake() {
     Invoke(nameof(Activate), 0.5f);
     playerControls = new PlayerControls();
     Instance = this;
+    _playerInventory = gameObject.GetComponent<PlayerInventory>();
 }
 
 void OnEnable() {
@@ -101,6 +102,11 @@ if(_isDashing) return;
 Velocity = (transform.position - _lastPosition) / Time.deltaTime;
 _lastPosition = transform.position;
 
+if (!_canDash && _colDown && _playerInventory.GetCurrentItem() == PlayerInventory.Items.Powerups_PunchingGlove)
+{
+    _canDash = true;
+}
+
 GatherInput();
 RunCollisionChecks();
 RunInteractions(); // Player item interactions
@@ -111,7 +117,6 @@ CalculateJumpApex(); // Affects fall speed, so calculate before gravity
 CalculateGravity(); // Vertical movement
 CalculateJump(); // Possibly overrides vertical
 MoveCharacter(); // Actually perform the axis movement
-
 }
 #region Gather Input
 private void GatherInput() {
@@ -370,10 +375,11 @@ private bool _canDash = false;
 [SerializeField] private bool _isDashing = false;
 [SerializeField] private float _dashingPower = 24f;
 [SerializeField] private float _dashingTime = 0.2f;
-[SerializeField] private float _dashingCooldown = 1f;
+//[SerializeField] private float _dashingCooldown = 1f;
 
 [SerializeField] private Rigidbody2D _rigidbody;
 [SerializeField] private TrailRenderer _trailRenderer;
+private PlayerInventory _playerInventory;
 private void DashCharacter()
 {
     playerControls.ActionMapPlayer.Click.started += context => 
@@ -381,7 +387,10 @@ private void DashCharacter()
         if(_canDash)
         {
             StartCoroutine(Dash());
+
         }
+        
+        
     };
     IEnumerator Dash()
     {
@@ -402,8 +411,7 @@ private void DashCharacter()
         _rigidbody.gravityScale = originalGravity;
         _rigidbody.velocity = originalVelocity;
         _isDashing = false;
-        yield return new WaitForSeconds(_dashingCooldown);
-        _canDash = true;
+        
     }
 
 }
