@@ -16,7 +16,7 @@ namespace SpeedGame
         [SerializeField] private bool isBreakable = false;
         [SerializeField] private bool playerInRange;
 
-        [SerializeField] private GameObject player;
+        [SerializeField] private PlayerController2 player;
         private Rigidbody2D playerRigidbody;
         private PlayerController playerController;
         private PlayerInventory playerInventory;
@@ -24,6 +24,7 @@ namespace SpeedGame
 
         private void Awake() 
         {
+            player = PlayerController2.Instance;
             _rigidbody = gameObject.GetComponentInParent<Rigidbody2D>();
             if(player != null)
             {
@@ -38,7 +39,7 @@ namespace SpeedGame
         {
             if(other.tag == "Player")
             {
-                player = other.gameObject;
+                //player = other.gameObject;
                 playerRigidbody = player.GetComponent<Rigidbody2D>();
                 playerController = player.GetComponent<PlayerController>();
                 playerInventory = player.GetComponent<PlayerInventory>();

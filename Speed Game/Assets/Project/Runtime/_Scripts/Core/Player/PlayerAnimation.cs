@@ -13,8 +13,8 @@ namespace SpeedGame.Core.Player
         [SerializeField] private Animator _animation;
         [SerializeField] private SpriteRenderer _spriteRenderer;
         private Rigidbody2D _rigidbody;
-        private PlayerController _playerController;
-        [SerializeField] Vector3 _velocity;
+        private PlayerController2 _playerController;
+        [SerializeField] Vector2 _velocity;
         // Animations:
         private static readonly int Idle = Animator.StringToHash("Idle");
         private static readonly int Walking = Animator.StringToHash("Walking");
@@ -23,11 +23,11 @@ namespace SpeedGame.Core.Player
         private void Awake() 
         {
             _rigidbody = gameObject.GetComponent<Rigidbody2D>();
-            _playerController = gameObject.GetComponent<PlayerController>();
+            _playerController = gameObject.GetComponent<PlayerController2>();
         }
         private void Update() 
         {
-            _velocity = _playerController.Velocity;
+            _velocity = _playerController._velocity;
 
             if(_velocity.x != 0 && _playerController.GetPlayerColDown()) 
             {

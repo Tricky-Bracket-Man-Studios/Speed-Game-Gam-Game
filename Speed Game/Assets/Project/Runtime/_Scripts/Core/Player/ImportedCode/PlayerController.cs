@@ -226,24 +226,28 @@ Gizmos.DrawWireCube(transform.position + _characterBounds.center + move, _charac
 [SerializeField] private float _moveClamp = 13;
 [SerializeField] private float _deAcceleration = 60f;
 [SerializeField] private float _apexBonus = 2;
-private void CalculateWalk() {
-if (Input.X != 0) {
-// Set horizontal move speed
-_currentHorizontalSpeed += Input.X * _acceleration * Time.deltaTime;
-// clamped by max frame movement
-_currentHorizontalSpeed = Mathf.Clamp(_currentHorizontalSpeed, -_moveClamp, _moveClamp);
-// Apply bonus at the apex of a jump
-var apexBonus = Mathf.Sign(Input.X) * _apexBonus * _apexPoint;
-_currentHorizontalSpeed += apexBonus * Time.deltaTime;
-}
-else {
-// No input. Let's slow the character down
-_currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.deltaTime);
-}
-if (_currentHorizontalSpeed > 0 && _colRight || _currentHorizontalSpeed < 0 && _colLeft) {
-// Don't walk through walls
-_currentHorizontalSpeed = 0;
-}
+private void CalculateWalk() 
+{
+    if (Input.X != 0) 
+    {
+        // Set horizontal move speed
+        _currentHorizontalSpeed += Input.X * _acceleration * Time.deltaTime;
+        // clamped by max frame movement
+        _currentHorizontalSpeed = Mathf.Clamp(_currentHorizontalSpeed, -_moveClamp, _moveClamp);
+        // Apply bonus at the apex of a jump
+        var apexBonus = Mathf.Sign(Input.X) * _apexBonus * _apexPoint;
+        _currentHorizontalSpeed += apexBonus * Time.deltaTime;
+    }
+    else 
+    {
+        // No input. Let's slow the character down
+        _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.deltaTime);
+    }
+    if (_currentHorizontalSpeed > 0 && _colRight || _currentHorizontalSpeed < 0 && _colLeft) 
+    {
+        // Don't walk through walls
+        _currentHorizontalSpeed = 0;
+    }
 }
 #endregion
 #region Gravity
