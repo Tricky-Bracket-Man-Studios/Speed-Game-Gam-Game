@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace SpeedGame.Core.Player
 {
-    public class PlayerController2 : MonoBehaviour
+    public partial class PlayerController2 : MonoBehaviour
     {
         // Definition:
         // This class will handle the inventory code for the player.
@@ -21,6 +21,7 @@ namespace SpeedGame.Core.Player
         
         private void Update()
         {
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
             CalculateWalk();
             CalculateGravity();
             MoveCharacter();
@@ -108,7 +109,7 @@ namespace SpeedGame.Core.Player
         {
             _X = _movement.ReadValue<float>();
 
-            _velocity.x = _X;
+            _velocity.x = _rigidbody.velocity.x;
 
             if(_X != 0)
             {
@@ -169,11 +170,11 @@ namespace SpeedGame.Core.Player
             var move = RawMovement * Time.deltaTime;
             var furthestPoint = pos + move;
             // flipping the characters sprite to match the direction its moving in
-            if(RawMovement.x > Vector2.zero.x && !isFacingRight)
+            if(_X > Vector2.zero.x && !isFacingRight)
             {
                 Flip();
             }
-            else if (RawMovement.x < Vector2.zero.x && isFacingRight)
+            else if (_X < Vector2.zero.x && isFacingRight)
             {
                 Flip();
             }
@@ -191,15 +192,17 @@ namespace SpeedGame.Core.Player
                 // increment to check all but furthestPoint - we did that already
                 var t = (float)i / _freeColliderIterations;
                 var posToTry = Vector2.Lerp(pos, furthestPoint, t);
-                if (Physics2D.OverlapBox(posToTry, new Vector2(transform.localScale.x, transform.localScale.y), 0, _groundLayer)) {
-                transform.position = positionToMoveTo;
-                // We've landed on a corner or hit our head on a ledge. Nudge the player gently
-                if (i == 1) {
-                if (_currentVerticalSpeed < 0) _currentVerticalSpeed = 0;
-                var dir = transform.position - hit.transform.position;
-                transform.position += dir.normalized * move.magnitude;
-                }
-                return;
+                if (Physics2D.OverlapBox(posToTry, new Vector2(transform.localScale.x, transform.localScale.y), 0, _groundLayer)) 
+                {
+                    transform.position = positionToMoveTo;
+                    // We've landed on a corner or hit our head on a ledge. Nudge the player gently
+                    if (i == 1) 
+                    {
+                        if (_currentVerticalSpeed < 0) _currentVerticalSpeed = 0;
+                        var dir = transform.position - hit.transform.position;
+                        transform.position += dir.normalized * move.magnitude;
+                    }
+                    return;
                 }
                 positionToMoveTo = posToTry;
             }
