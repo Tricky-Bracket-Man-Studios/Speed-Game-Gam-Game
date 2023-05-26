@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,9 +23,6 @@ namespace SpeedGame.Intractables.Items.Powerups
         {
             if(other.tag == "Player")
             {
-                player = other.gameObject.GetComponent<PlayerMovementControls>() ;
-                playerInventory = other.gameObject.GetComponent<PlayerInventory>() ;
-
                 playerInRange = true;
             }
             
@@ -38,18 +36,21 @@ namespace SpeedGame.Intractables.Items.Powerups
             
         }
 
-        private void Update()
+        private void Start()
+        {
+            player = PlayerMovementControls.Instance;
+            playerInventory = player.gameObject.GetComponent<PlayerInventory>();
+            player.OnInteractionPressed += PickUpItem;
+        }
+
+        private void PickUpItem(object sender, EventArgs e)
         {
             if(playerInRange)
             {
-                if(player.GetPlayerIsInteracting())
-                {
-                    playerInventory.AddToInventory(PlayerInventory.Items.Powerups_PunchingGlove);
-                    playerInventory.AddStoredPowerup(gameObject);
-                    gameObject.SetActive(false);
-                }
+                playerInventory.AddToInventory(PlayerInventory.Items.Powerups_PunchingGlove);
+                playerInventory.AddStoredPowerup(gameObject);
+                gameObject.SetActive(false);
             }
-            
         }
 
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,11 @@ namespace SpeedGame.Core.Player
     {
         // Definition:
         // This class will handle the player's movement
+    #region Events:
 
+        public event EventHandler OnInteractionPressed;
+
+    #endregion
     #region Fields:
         public static PlayerMovementControls Instance;
 
@@ -175,7 +180,7 @@ namespace SpeedGame.Core.Player
             if(!_isGrounded && Mathf.Abs(_rigidbody2D.velocity.y) < jumpHangTimeThreshold)
             {
                 SetPlayerGravity(_originalGravity * jumpHangGravityMultiplier);
-                Debug.Log(_rigidbody2D.gravityScale);
+                //Debug.Log(_rigidbody2D.gravityScale);
             }
             
         }
@@ -261,7 +266,8 @@ namespace SpeedGame.Core.Player
         {
             if(context.performed)
             {
-                _playerIsInteracting = true;
+                OnInteractionPressed?.Invoke(this, EventArgs.Empty);
+                
             }
             if(context.canceled)
             {

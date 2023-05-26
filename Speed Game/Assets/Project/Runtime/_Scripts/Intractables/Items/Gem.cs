@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ namespace SpeedGame.Intractables.Items
 
         // Variables:
         private bool playerInRange = false;
-        [SerializeField] private PlayerController player;
+        [SerializeField] private PlayerMovementControls player;
         [SerializeField] private PlayerInventory playerInventory;
         [SerializeField] private Transform _parentTransform;
         
@@ -22,9 +23,6 @@ namespace SpeedGame.Intractables.Items
         {
             if(other.tag == "Player")
             {
-                player = other.gameObject.GetComponent<PlayerController>() ;
-                playerInventory = other.gameObject.GetComponent<PlayerInventory>() ;
-
                 playerInRange = true;
             }
             
@@ -38,18 +36,21 @@ namespace SpeedGame.Intractables.Items
             
         }
 
-        private void Update()
+        private void Start()
+        {
+            player = PlayerMovementControls.Instance;
+            playerInventory = player.gameObject.GetComponent<PlayerInventory>();
+            player.OnInteractionPressed += PickUpItem;
+        }
+
+        private void PickUpItem(object sender, EventArgs e)
         {
             if(playerInRange)
             {
-                if(player.GetPlayerIsInteracting())
-                {
-                    playerInventory.AddToInventory(PlayerInventory.Items.Items_Gem);
-                    playerInventory.AddStoredPowerup(gameObject);
-                    gameObject.SetActive(false);
-                }
+                playerInventory.AddToInventory(PlayerInventory.Items.Items_Gem);
+                playerInventory.AddStoredPowerup(gameObject);
+                gameObject.SetActive(false);
             }
-            
         }
 
     }
