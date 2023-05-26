@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9050887462732413514}
   - component: {fileID: 4656149859133003870}
   - component: {fileID: 47236283608480981}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jump Boots
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1322378823480706015}
   - component: {fileID: 1322378823480706014}
   - component: {fileID: 5786723256364654188}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Lead Boots
   m_TagString: Untagged
   m_Icon: {fileID: 0}

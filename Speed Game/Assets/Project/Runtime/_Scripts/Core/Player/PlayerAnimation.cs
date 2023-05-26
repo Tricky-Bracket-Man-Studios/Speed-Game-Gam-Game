@@ -13,8 +13,9 @@ namespace SpeedGame.Core.Player
         [SerializeField] private Animator _animation;
         [SerializeField] private SpriteRenderer _spriteRenderer;
         private Rigidbody2D _rigidbody;
-        private PlayerController2 _playerController;
+        private PlayerMovementControls _playerController;
         [SerializeField] Vector2 _velocity;
+        [SerializeField] bool isFacingRight;
         // Animations:
         private static readonly int Idle = Animator.StringToHash("Idle");
         private static readonly int Walking = Animator.StringToHash("Walking");
@@ -22,14 +23,21 @@ namespace SpeedGame.Core.Player
         // Private Functions:
         private void Awake() 
         {
-            _rigidbody = gameObject.GetComponent<Rigidbody2D>();
-            _playerController = gameObject.GetComponent<PlayerController2>();
+            _rigidbody = gameObject.GetComponentInParent<Rigidbody2D>();
+            _playerController = gameObject.GetComponentInParent<PlayerMovementControls>();
         }
+        private void Start()
+        {
+            isFacingRight = true;
+        }
+
         private void Update() 
         {
-            _velocity = _playerController._velocity;
+            _velocity = _playerController.GetPlayerVelocity();
 
-            if(_velocity.x != 0 && _playerController.GetPlayerColDown()) 
+            SpriteDirection();
+
+            if((_velocity.x >= 0.01 || _velocity.x <= -0.01) && _playerController.GetPlayerIsGrounded()) 
             {
                 _animation.CrossFade(Walking, 0, 0);
             }
@@ -38,7 +46,7 @@ namespace SpeedGame.Core.Player
                 _animation.CrossFade(Idle, 0, 0);
             }
 
-            if(!_playerController.GetPlayerColDown()) 
+            if(!_playerController.GetPlayerIsGrounded()) 
             {
                 _animation.speed = 1;
                 if(_velocity.y > 9.25) 
@@ -78,6 +86,43 @@ namespace SpeedGame.Core.Player
             {
                 _animation.speed = 1;
             }
+        }
+
+        private void SpriteDirection()
+        {
+            if(_playerController.GetPlayerInputX() != 0f)
+            {
+                if(_playerController.GetPlayerInputX() > 0.1f && !isFacingRight)
+                {
+                    Flip();
+                }
+                else if(_playerController.GetPlayerInputX() < -0.1f && isFacingRight)
+                {
+                    Flip();
+                }
+            }
+        }
+        private void Flip()
+        {
+            _spriteRenderer.flipX = !_spriteRenderer.flipX;
+
+            isFacingRight = !isFacingRight;
+        }
+
+        public float GetIsFacingRight()
+        {
+            float direction;
+
+            if (isFacingRight)
+            {
+                direction = 1f;
+            }
+            else
+            {
+                direction = -1f;
+            }
+
+            return direction;
         }
     }
 }

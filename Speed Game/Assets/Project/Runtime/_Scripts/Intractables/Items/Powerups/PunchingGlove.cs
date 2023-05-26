@@ -12,7 +12,7 @@ namespace SpeedGame.Intractables.Items.Powerups
 
         // Variables:
         private bool playerInRange = false;
-        [SerializeField] private PlayerController player;
+        [SerializeField] private PlayerMovementControls player;
         [SerializeField] private PlayerInventory playerInventory;
         [SerializeField] private Transform _parentTransform;
         
@@ -22,7 +22,7 @@ namespace SpeedGame.Intractables.Items.Powerups
         {
             if(other.tag == "Player")
             {
-                player = other.gameObject.GetComponent<PlayerController>() ;
+                player = other.gameObject.GetComponent<PlayerMovementControls>() ;
                 playerInventory = other.gameObject.GetComponent<PlayerInventory>() ;
 
                 playerInRange = true;

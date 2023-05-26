@@ -24,13 +24,13 @@ namespace SpeedGame.Core.Player
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private AudioClip _defaultClip;
         [SerializeField] private AudioClip GemAudioClip;
-        private PlayerController _controller;
+        private PlayerMovementControls _controller;
 
 
         // Private functions:
         private void Start() 
         {
-            _controller = gameObject.GetComponent<PlayerController>();
+            _controller = gameObject.GetComponent<PlayerMovementControls>();
             _inventory = new Items[] {0};
             _currentItem = _inventory[0];
         }

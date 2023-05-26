@@ -41,7 +41,7 @@ void OnEnable() {
     _movement.Enable();
     _jump = playerControls.ActionMapPlayer.Jump;
     _jump.Enable();
-    _click = playerControls.ActionMapPlayer.Click;
+    _click = playerControls.ActionMapPlayer.Dash;
     _click.Enable();
     _interact = playerControls.ActionMapPlayer.Interact;
     _interact.Enable();
@@ -386,7 +386,7 @@ private bool _canDash = false;
 private PlayerInventory _playerInventory;
 private void DashCharacter()
 {
-    playerControls.ActionMapPlayer.Click.started += context => 
+    playerControls.ActionMapPlayer.Dash.started += context => 
     {
         if(_canDash)
         {

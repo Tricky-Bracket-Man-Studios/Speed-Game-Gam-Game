@@ -8,6 +8,12 @@ namespace SpeedGame.Core.Environment
     {
         // Definition:
         // This Class will handle what the DeathTrigger does to the player:
+
+        #region fields:
+
+        [SerializeField] private Vector2 _spawnPosition;
+
+        #endregion
         
         #region Methods:
         // When the player hits our trigger:
@@ -16,7 +22,7 @@ namespace SpeedGame.Core.Environment
             if(other.CompareTag("Player"))
             {
                 Debug.Log("Respawned");
-                other.gameObject.transform.position = new Vector2(-35f, 1);
+                other.gameObject.transform.position = _spawnPosition;
             }
             
         }

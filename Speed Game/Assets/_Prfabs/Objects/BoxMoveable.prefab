@@ -75,7 +75,7 @@ MonoBehaviour:
   isMoveable: 1
   isBreakable: 0
   playerInRange: 0
-  player: {fileID: 0}
+  colliders: []
 --- !u!1 &2872001636797027279
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,10 +86,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2872001636797027278}
   - component: {fileID: 2872001636797027273}
-  - component: {fileID: 2872001636797027276}
   - component: {fileID: 2872001636797027274}
   - component: {fileID: 2872001636797027275}
-  m_Layer: 3
+  - component: {fileID: 2252619906738943753}
+  m_Layer: 7
   m_Name: BoxMoveable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,27 +138,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.98, y: 0.98}
   m_EdgeRadius: 0
---- !u!50 &2872001636797027276
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2872001636797027279}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!23 &2872001636797027274
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -209,3 +188,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2872001636797027279}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!50 &2252619906738943753
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2872001636797027279}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
